@@ -1,0 +1,15 @@
+Notes Final Project
+
+- average political news articles
+- n-grams: source names should be removed from the training data, because they won't be on the test data (might be too good predictors)
+- look at shared task from previous years to see what absolutely did not work
+- only give necessary output, no interactive output
+- look at label distribution
+- evaluation is 3-fold: 1 label, other label, both labels
+- Hand-in deadline: 29 October
+- using named entites (words in the window of named entities)
+- right wing vs. left wing embeddings/connotations
+- extreme left vs. extreme right wing --> infer binary from multilabel task? or have 2 classifiers?
+- LOOK AT THE DATA
+- 
+
