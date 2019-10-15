@@ -7,9 +7,35 @@ Notes Final Project
 - look at label distribution
 - evaluation is 3-fold: 1 label, other label, both labels
 - Hand-in deadline: 29 October
+
 - using named entites (words in the window of named entities)
 - right wing vs. left wing embeddings/connotations
 - extreme left vs. extreme right wing --> infer binary from multilabel task? or have 2 classifiers?
 - LOOK AT THE DATA
-- 
 
+Classifiers:
+- finding the best features (3-grams, 4-grams), find the most important features (feature contribution, assignment 3)
+- feature contribution test on the baseline
+- PCA and SVD?
+
+- average length of a sentence? --> test a single feature at a time
+- use word embeddings 
+
+-just do classification on the titles?
+
+Cleaning:
+- clean the text (delete the points in the beginning)
+- removing the source names
+
+Class distribution / Data analysis:
+- underrepresented class (center-right)
+- need to make a validation set split
+- get data descriptives (average length, word count, corpus count)
+
+Literature
+- see how other people have done it / look at the results of last year's shared task
+- point of view of political biases
+
+Marion: Literature + Best features/N-grams
+Blanca: (Literature) Data distribution + cleaning / named entity recognition
+Inga: (Literature) Embeddings, dealing with underrepresented class
