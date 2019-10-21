@@ -50,8 +50,8 @@ if __name__ == '__main__':
 
     print(cnt_check)
 
-    # only get ID, hyperp and bias labels + text
-    cols = ['id', 'hyperp', 'bias', 'text']
+    # only get ID, hyperp, bias labels, publisher (website) + text
+    cols = ['id', 'hyperp', 'bias', 'publisher', 'text']
     small_set_relevant = small_set.loc[:, small_set.columns.isin(cols)]
 
     # save the small dataset to tsv file
@@ -59,3 +59,4 @@ if __name__ == '__main__':
                               index=False,
                               header=cols,
                               sep='\t')
+
