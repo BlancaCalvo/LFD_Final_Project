@@ -9,7 +9,7 @@ from sklearn.utils import shuffle
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('hyperp-training-grouped.csv.xz',
+    data = pd.read_csv('../data/hyperp-training-grouped.csv.xz',
                        compression='xz', sep='\t',
                        encoding='utf-8', index_col=0).dropna()
 
@@ -50,13 +50,12 @@ if __name__ == '__main__':
 
     print(cnt_check)
 
-    # only get ID, hyperp, bias labels, publisher (website) + text
+    # only get ID, hyperp and bias labels + text
     cols = ['id', 'hyperp', 'bias', 'publisher', 'text']
     small_set_relevant = small_set.loc[:, small_set.columns.isin(cols)]
 
     # save the small dataset to tsv file
-    small_set_relevant.to_csv(path_or_buf='small_train_balanced.tsv',
+    small_set_relevant.to_csv(path_or_buf='data/small_train_balanced.tsv',
                               index=False,
                               header=cols,
                               sep='\t')
-
