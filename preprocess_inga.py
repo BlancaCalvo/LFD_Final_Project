@@ -4,12 +4,12 @@ import json
 import re
 
 def import_data():
-    train = pd.read_csv('hyperp-training-grouped.csv.xz',
-        compression='xz',
-        sep='\t',
-        encoding='utf-8',
-        index_col=0).dropna()
-    #train = pd.read_csv("small_train_balanced.tsv",sep='\t')
+    # train = pd.read_csv('hyperp-training-grouped.csv.xz',
+    #     compression='xz',
+    #     sep='\t',
+    #     encoding='utf-8',
+    #     index_col=0).dropna()
+    train = pd.read_csv("data/small_train_balanced.tsv",sep='\t')
     return train
 
 def replaceMultiple(mainString, toBeReplaces, newString): #replace more than one string
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     publishers.add('albuquerque')
     train['text'] = train.text.apply(lambda x: clean_data(x, publishers))
 
-    dict = restructure_data(train)
+    dict = train.to_dict('dict')
 
-    with open('large_restructured_tokenized_with_NUM.json', 'w') as json_file:
+    with open('tokenized_with_NUM.json', 'w') as json_file:
         json.dump(dict, json_file)
