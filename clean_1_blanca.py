@@ -41,11 +41,15 @@ if __name__ == '__main__':
 	train = import_data()
 	print('Cleaning data...')
 	publishers = take_media_names(train.publisher)
+	publishers.add('nbc')
+	publishers.add('fox')
+	publishers.add('daily')
+	publishers.add('albuquerque')
 	train['sentences'] = train.text.apply(lambda x: clean_data(x, publishers))
-
+	#print(train.sentences.head(30))
 	train = train.to_dict('dict')
 
-	with open('tokenised.json', 'w') as json_file:
+	with open('../tokenised.json', 'w') as json_file:
 		json.dump(train, json_file) 
 
 
