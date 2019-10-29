@@ -1,4 +1,4 @@
-import re, nltk
+import re
 
 
 def replaceMultiple(main_string, to_be_replaced, new_string): #replace more than one string
@@ -37,11 +37,11 @@ def remove_punctuation(text):
 # Cleans the data by removing punctuation. Removes publisher names only for text, not for titles.
 # Returns tokenized, cleaned data.
 def clean_data(data, publishers, title):
-    data = replace_numbers(data.lower())
+    data = replace_numbers(data)
     data = remove_punctuation(data)
     if not title:
-        data = remove_publishers(data, publishers)
-    return nltk.tokenize.word_tokenize(data)
+        return [word for word in data.split() if word not in publishers]
+    else: return [word for word in data.split()]
 
 
 # Preprocesses the data. If the data is training data, also removes additional publishers.
@@ -49,7 +49,8 @@ def clean_data(data, publishers, title):
 def preprocess(data, train):
     publishers = take_media_names(data.publisher)
     if train:
-        publishers.update(['nbc', 'fox', 'daily', 'albuquerque', 'washington post'])
+        publishers.update(['NBC', 'Fox', 'Daily', 'Albuquerque', 'Advertisement',
+                           'ADVERTISEMENT', 'Continue', 'Reading', 'Below'])
 
     print('Cleaning data...')
     data['text'] = data.text.apply(lambda x: clean_data(x, publishers, title=False))
