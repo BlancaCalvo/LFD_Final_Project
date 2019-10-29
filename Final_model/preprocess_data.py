@@ -56,9 +56,10 @@ def preprocess(data, train):
     data['text'] = data.text.apply(lambda x: clean_data(x, publishers, title=False))
     data['title'] = data.title = data.title.apply(lambda x: clean_data(x, publishers, title=True))
 
-    print("Removing short articles...")
-    new_data = data[data['text'].map(len) >= 100]
+    if train:
+        print("Removing short articles...")
+        new_data = data[data['text'].map(len) >= 100]
+        return new_data
 
-    return new_data
-
+    return data
 
