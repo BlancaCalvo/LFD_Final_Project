@@ -127,7 +127,7 @@ def two_step_classification(train, test):
     t0 = time.time()
     pipeline.fit(train, train.hyperp)
     t1 = time.time()
-    print("Fit time: ", t1-t0)
+    print("Fit time: {0:.2f}".format((t1-t0)/60))
     new_test = test.reset_index()
 
     print("Predicting hyperpartisanship...")
@@ -185,7 +185,7 @@ def two_step_classification(train, test):
     t2 = time.time()
     clf_true.fit(true, true.bias)
     t3 = time.time()
-    print("Fit time: ", t3 - t2)
+    print("Fit time: {0:.2f}".format((t3 - t2)/60))
 
     # Based on the first classifier's predictions, the instances that were classified as False
     # are passed to a classifier to further predict if they're left-center, right-center, or least.
@@ -237,7 +237,7 @@ def two_step_classification(train, test):
     t4 = time.time()
     clf_false.fit(false, false.bias)
     t5 = time.time()
-    print("Fit time: ", t5 - t4)
+    print("Fit time: {0:.2f}".format((t5 - t4)/60))
 
     true_test_i = [i for i,v in hyperp_dict.items() if v == True]
     false_test_i = [i for i,v in hyperp_dict.items() if v == False]
