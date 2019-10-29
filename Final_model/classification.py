@@ -25,7 +25,7 @@ class Adj_Adv_counter(BaseEstimator, TransformerMixin):
 
     def _get_features(self, doc):
         pos_doc = nltk.pos_tag(doc)
-        print(pos_doc)
+        #print(pos_doc)
         return {"superlatives": len([itm[0] for itm in pos_doc if itm[1] in ["RBS", "JJS"]]),
                 "comparatives": len([itm[0] for itm in pos_doc if itm[1] in ["RBR", "JJR"]])}
 
@@ -88,27 +88,33 @@ def two_step_classification(train, test):
                 # Pipeline for pulling features from the post's subject line
                 ('title', Pipeline([
                     ('selector', ItemSelector(key='title')),
-                    ('tfidf', TfidfVectorizer(preprocessor=identity, tokenizer=identity))
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                 ])),
 
                 # Pipeline for standard bag-of-words model for body
                 ('body_bow', Pipeline([
                     ('selector', ItemSelector(key='text')),
-                    ('tfidf', TfidfVectorizer(preprocessor=identity, tokenizer=identity))
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                     # ('best', TruncatedSVD(n_components=50)),
                 ])),
 
-                ('adj_adv_vec', Pipeline([
-                    ('selector', ItemSelector(key='text')),
-                    ('adj_adv', Adj_Adv_counter()),
-                    ('vec', DictVectorizer())
-                 ])),
+                #('adj_adv_vec', Pipeline([
+                #    ('selector', ItemSelector(key='text')),
+                #    ('adj_adv', Adj_Adv_counter()),
+                #    ('vec', DictVectorizer())
+                # ])),
 
-                ('adj_adv_vec_title', Pipeline([
-                    ('selector', ItemSelector(key='title')),
-                    ('adj_adv', Adj_Adv_counter()),
-                    ('vec', DictVectorizer())
-                ])),
+                #('adj_adv_vec_title', Pipeline([
+                #    ('selector', ItemSelector(key='title')),
+                #    ('adj_adv', Adj_Adv_counter()),
+                #    ('vec', DictVectorizer())
+                #])),
 
             ],
         )),
@@ -141,13 +147,19 @@ def two_step_classification(train, test):
                 # Pipeline for pulling features from the post's subject line
                 ('title', Pipeline([
                     ('selector', ItemSelector(key='title')),
-                    ('tfidf', TfidfVectorizer(min_df=50, preprocessor=identity, tokenizer=identity)),
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                 ])),
 
                 # Pipeline for standard bag-of-words model for body
                 ('body_bow', Pipeline([
                     ('selector', ItemSelector(key='text')),
-                    ('tfidf', TfidfVectorizer(preprocessor=identity, tokenizer=identity)),
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                     # ('best', TruncatedSVD(n_components=50)),
                 ])),
 
@@ -157,11 +169,11 @@ def two_step_classification(train, test):
                     ('vec', DictVectorizer())
                 ])),
 
-                ('adj_adv_vec_title', Pipeline([
-                    ('selector', ItemSelector(key='title')),
-                    ('adj_adv', Adj_Adv_counter()),
-                    ('vec', DictVectorizer())
-                ])),
+                #('adj_adv_vec_title', Pipeline([
+                #    ('selector', ItemSelector(key='title')),
+                #    ('adj_adv', Adj_Adv_counter()),
+                #    ('vec', DictVectorizer())
+                #])),
 
             ],
         )),
@@ -187,27 +199,33 @@ def two_step_classification(train, test):
                 # Pipeline for pulling features from the post's subject line
                 ('title', Pipeline([
                     ('selector', ItemSelector(key='title')),
-                    ('tfidf', TfidfVectorizer(min_df=50, preprocessor=identity, tokenizer=identity)),
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                 ])),
 
                 # Pipeline for standard bag-of-words model for body
                 ('body_bow', Pipeline([
                     ('selector', ItemSelector(key='text')),
-                    ('tfidf', TfidfVectorizer(preprocessor=identity, tokenizer=identity)),
+                    ('tfidf', TfidfVectorizer(max_features=10000,
+                        preprocessor=identity, 
+                        tokenizer=identity,
+                        ngram_range=(1, 4)))
                     # ('best', TruncatedSVD(n_components=50)),
                 ])),
 
-                ('adj_adv_vec', Pipeline([
-                    ('selector', ItemSelector(key='text')),
-                    ('adj_adv', Adj_Adv_counter()),
-                    ('vec', DictVectorizer())
-                ])),
+                #('adj_adv_vec', Pipeline([
+                #    ('selector', ItemSelector(key='text')),
+                #    ('adj_adv', Adj_Adv_counter()),
+                #    ('vec', DictVectorizer())
+                #])),
 
-                ('adj_adv_vec_title', Pipeline([
-                    ('selector', ItemSelector(key='title')),
-                    ('adj_adv', Adj_Adv_counter()),
-                    ('vec', DictVectorizer())
-                ])),
+                #('adj_adv_vec_title', Pipeline([
+                #    ('selector', ItemSelector(key='title')),
+                #    ('adj_adv', Adj_Adv_counter()),
+                #    ('vec', DictVectorizer())
+                #])),
 
             ],
         )),
